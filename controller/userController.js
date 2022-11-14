@@ -2,7 +2,7 @@ const User = require("../models/User");
 
 module.exports = {
   getUsers(req, res) {
-    User.find()
+    User.find().populate('thoughts').populate('friends')
       .then((users) => res.status(200).json(users))
       .catch((err) => res.status(500).json(err));
   },
