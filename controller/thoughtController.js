@@ -1,12 +1,20 @@
 const Thought = require("../models/Thought");
 const User = require("../models/User");
 
+// Bulk exporting all of our CRUD operations;
+
 module.exports = {
+
+  // Return all thoughts in our DB;
+
   getThoughts(req, res) {
     Thought.find()
       .then((thoughts) => res.json(thoughts))
       .catch((err) => res.status(500).json(err));
   },
+
+  // Return a single thought by its _id
+
   getSingleThought(req, res) {
     Thought.findOne({ _id: req.params.thoughtId })
       .populate("reactions")
@@ -17,6 +25,9 @@ module.exports = {
       )
       .catch((err) => res.status(500).json(err));
   },
+
+  // Create a new thought;
+
   async createThought(req, res) {
     try {
       const data = await Thought.create(req.body);
@@ -30,6 +41,9 @@ module.exports = {
       res.status(500).json(error);
     }
   },
+
+  // Update a thought with our body;
+
   updateThought(req, res) {
     Thought.findOneAndUpdate(
       { _id: req.params.thoughtId },
@@ -41,17 +55,25 @@ module.exports = {
         : res.json(thought)
     );
   },
+
+  // Delete a thought by its _id;
+
   deleteThought(req, res) {
     Thought.findOneAndRemove({ _id: req.params.thoughtId }).then(
       res.json({ message: "Thought deleted." })
     );
   },
+
+  // Get all reactions from a thought by thoughtId;
+
   getReactions(req, res) {
     Thought.findOne({ _id: req.params.thoughtId })
       .populate("reactions")
       .then((reactions) => res.status(200).json(reactions))
       .catch((err) => res.status(500).json(err));
   },
+
+  // Create a reaction without our request body;
 
   createReaction(req, res) {
     Thought.findOneAndUpdate(
@@ -64,6 +86,8 @@ module.exports = {
       .catch((err) => res.status(500).json(err));
   },
 
+// Delete a reaction from a thought by thoughtId and reactionId;
+  
   deleteReaction(req, res) {
     Thought.findOneAndUpdate(
       { _id: req.params.thoughtId },
