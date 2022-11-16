@@ -11,19 +11,19 @@ const {
   deleteReaction,
 } = require("../../controller/thoughtController");
 
-router.route("/").get(getThoughts).post(createThought);
+router.route("/").get(getThoughts).post(createThought); // GET and POST a thought at localhost:3001/api/thoughts;
 
 router
-  .route("/:thoughtId")
+  .route("/:thoughtId") // GET, PUT, and DELETE thought throught thought's id at localhost:3001/api/thoughts/:thoughtId;
   .get(getSingleThought)
   .put(updateThought)
-  .delete(deleteThought);
+  .delete(deleteThought); 
 
-router.route('/:thoughtId/reactions')
+router.route('/:thoughtId/reactions') // GET and POST a reaction through thought's id at localhost:3001/api/thoughts/:thoughtId/reactions; 
   .get(getReactions)
   .post(createReaction)
 
-router.route('/:thoughtId/reactions/:reactionId')
+router.route('/:thoughtId/reactions/:reactionId') // DELETE a reaction throught thought and reaction's id at localhost:3001/api/thoughts/:thoughtId/reactions/:reactionId;
   .delete(deleteReaction)
 
 module.exports = router;
