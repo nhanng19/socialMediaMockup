@@ -1,5 +1,5 @@
  # 18_Social_Network_API_NN
-BootCamp Homework - 18 NoSQL: Social Network API
+NoSQL: Social Network API
 
 ## The Challenge
 MongoDB is a popular choice for many social networks due to its speed with large amounts of data and flexibility with unstructured data.
